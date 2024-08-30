@@ -6,6 +6,8 @@ struct EEPROMClass {
   virtual void write(int idx, uint8_t val);
   virtual void update(int idx, uint8_t val);
   virtual uint16_t length();
+  // This only exists on specific boards
+  virtual void commit();
   /*
   EERef operator[](const int idx);
 

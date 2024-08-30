@@ -13,5 +13,6 @@ void EEPROMClass::update(int idx, uint8_t val) {
   ArduinoFakeInstance(EEPROM)->update(idx, val);
 };
 uint16_t EEPROMClass::length() { return ArduinoFakeInstance(EEPROM)->length(); }
+void EEPROMClass::commit() { }
 
 EEPROMClass EEPROM = EEPROMFakeProxy(ArduinoFakeInstance(EEPROM));

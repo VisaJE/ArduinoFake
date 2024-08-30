@@ -8,6 +8,7 @@ struct EEPROMFake {
   virtual void write(int idx, uint8_t val) = 0;
   virtual void update(int idx, uint8_t val) = 0;
   virtual uint16_t length() = 0;
+  virtual void commit() = 0;
 };
 
 class EEPROMFakeProxy : public EEPROMClass {
