@@ -100,6 +100,10 @@ class SPIClass {
   // Write to the SPI bus (MOSI pin) and also receive (MISO pin)
   virtual uint8_t transfer(uint8_t data);
   virtual void transfer(void *buf, size_t count);
+  virtual void transfer(const void *buf, void* ret, size_t count);
+
+  virtual uint16_t transfer16(uint16_t);
+  virtual uint32_t transfer32(uint32_t);
 
   // After performing a group of transfers and releasing the chip select
   // signal, this function allows others to access the SPI bus

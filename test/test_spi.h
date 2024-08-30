@@ -16,11 +16,13 @@ void test_basics(void) {
   When(OverloadedMethod(ArduinoFake(SPI), endTransaction, void(void))).AlwaysReturn();
   When(OverloadedMethod(ArduinoFake(SPI), transfer, uint8_t(uint8_t)).Using(data)).AlwaysReturn();
   When(OverloadedMethod(ArduinoFake(SPI), transfer, void(void*, size_t)).Using(ptr, sizeof(buffer))).AlwaysReturn();
+  When(OverloadedMethod(ArduinoFake(SPI), transfer, void(const void*, void*, size_t)).Using(ptr, ptr, sizeof(buffer))).AlwaysReturn();
 
   SPI.begin();
   SPI.beginTransaction(settings);
   SPI.transfer(data);
   SPI.transfer(buffer, sizeof(buffer));
+  SPI.transfer(buffer, buffer, sizeof(buffer));
   SPI.endTransaction();
   SPI.end();
 
@@ -30,6 +32,7 @@ void test_basics(void) {
   Verify(OverloadedMethod(ArduinoFake(SPI), endTransaction, void(void))).Once();
   Verify(OverloadedMethod(ArduinoFake(SPI), transfer, uint8_t(uint8_t))).Once();
   Verify(OverloadedMethod(ArduinoFake(SPI), transfer, void(void*, size_t))).Once();
+  Verify(OverloadedMethod(ArduinoFake(SPI), transfer, void(const void*, void*, size_t))).Once();
 }
 
 void run_tests() { RUN_TEST(SpiTest::test_basics); }
